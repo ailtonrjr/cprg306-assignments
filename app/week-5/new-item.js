@@ -19,11 +19,13 @@ export default function Counter() {
   const handleSubmit = (event) => {
     event.preventDefault();
     let item = { name, category, count };
+    alert(`Added item: ${name}, quantity: ${count}, category: ${category}`);
     console.log(item);
   };
 
   const handleNameChange = (event) => {
-    setName(event.target.value);
+    let newName = event.target.value.toUpperCase();
+    setName(newName);
   };
 
   const handleCategoryChange = (event) => {
