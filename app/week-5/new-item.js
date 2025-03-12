@@ -6,12 +6,14 @@ export default function Counter() {
   const [name, setName] = useState("");
   const [category, setCategory] = useState("produce");
 
-  const increment = () => {
+  const increment = (event) => {
     setCounter(count + 1);
+    event.preventDefault();
     console.log(count);
   };
 
-  const decrement = () => {
+  const decrement = (event) => {
+    event.preventDefault();
     setCounter(count - 1);
     console.log(count);
   };
@@ -56,6 +58,7 @@ export default function Counter() {
             className="bg-blue-500 w-12 h-6 m-1 font-extrabold rounded-lg text-white disabled:bg-gray-400"
             onClick={decrement}
             disabled={count <= 1}
+            type="button"
           >
             {" "}
             {"-"}{" "}
@@ -64,6 +67,7 @@ export default function Counter() {
             className="bg-blue-500 w-12 h-6 mr-2 justify-center font-extrabold rounded-lg text-white disabled:bg-gray-400"
             onClick={increment}
             disabled={count >= 20}
+            type="button"
           >
             {" "}
             {"+"}{" "}
@@ -91,10 +95,11 @@ export default function Counter() {
       </div>
       <div className="flex flex-row items-center justify-center w-96 h-1/3  bg-slate-800">
         <button
-          className="bg-blue-500 w-96 h-10 m-2 font-extrabold rounded-md text-white disabled:bg-gray-400"
+          className="bg-blue-500 w-96 h-10 m-2 font-extrabold rounded-md text-white"
           type="submit"
+          onSubmit={handleSubmit}
         >
-          {"+"}
+          {"Submit"}
         </button>
       </div>
     </form>
