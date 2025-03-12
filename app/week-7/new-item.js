@@ -1,7 +1,9 @@
 "use client";
 import { useState } from "react";
+import { v4 as uuidv4 } from 'uuid';
 
-export default function Counter() {
+export default function Counter({ onAddItem }) {
+
   const [count, setCounter] = useState(1);
   const [name, setName] = useState("");
   const [category, setCategory] = useState("produce");
@@ -20,9 +22,10 @@ export default function Counter() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    let item = { name, category, count };
-    alert(`Added item: ${name}, quantity: ${count}, category: ${category}`);
-    console.log(item);
+    let item = {id: uuidv4(), name, category, quantity: count };
+    onAddItem(item);
+    setName("");
+    setCounter(1);
   };
 
   const handleNameChange = (event) => {
