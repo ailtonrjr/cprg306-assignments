@@ -1,14 +1,13 @@
 "use client";
 
-import { useState } from "react";
-import ItemsData from "./items.json";
+import { useState} from "react";
 import Item from "./item";
 
-export default function ItemList() {
-  const [sortBy, setSortBy] = useState("name");
-    
+export default function ItemList({ items, onItemSelect }) {
 
-  const sortedItems = [...ItemsData].sort((a, b) => {
+  const [sortBy, setSortBy] = useState("name");
+  
+  const sortedItems = [...items].sort((a, b) => {
     if (sortBy === "name") {
       return a.name.localeCompare(b.name);
     } else if (sortBy === "category") {
@@ -16,7 +15,6 @@ export default function ItemList() {
     }
   });
 
-  
   return (
     <main className="bg-slate-950 min-h-screen">
       <div className="flex align-baseline justify-items-start mt-6 p-1">
@@ -51,7 +49,11 @@ export default function ItemList() {
       <div className="flex justify-start m-2 p-1">
         <ul className="w-4/6 shadow-lg ">
           {sortedItems.map((item) => (
-            <li key={item.id} className="bg-slate-900 my-4 p-2 text-white w-1/4">
+            <li 
+            key={item.id}
+            onClick={() => onItemSelect(item)}
+            className={`bg-slate-900 my-4 p-2 text-white cursor-pointer hover:bg-orange-700 w-96`}
+            >
               <h3 className="font-bold text-xl">{item.name}</h3>
               <p className="font-light text-md">
                 Buy {item.quantity} in {item.category}
